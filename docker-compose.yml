@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: https://github.com/alyesha27/lr1backend.git#v2.0
+    image: lr1backend:2.0
+    container_name: lr1backend
+    restart: always
+    environment:
+      DATA_FILE: /data/data.txt
+    volumes:
+      - ./data:/data
+    networks:
+      - app-net
+
+  frontend:
+    build:
+      context: https://github.com/alyesha27/lr1frontend.git#v2.0
+    image: lr1frontend:2.0
+    container_name: lr1frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
