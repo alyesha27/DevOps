@@ -1,0 +1,14 @@
+---
+# Главный плейбук: разворачивает frontend и backend на удалённой ноде.
+#
+# Раскатка (docker + клонирование репозиториев + запуск):
+#   ansible-playbook -i inventory/stend1/hosts firstPlaybook.yml --tags deploy
+# Запуск контейнеров:
+#   ansible-playbook -i inventory/stend1/hosts firstPlaybook.yml --tags start
+# Остановка контейнеров:
+#   ansible-playbook -i inventory/stend1/hosts firstPlaybook.yml --tags stop
+- name: Раскатка микросервисов frontend и backend через Docker Compose
+  hosts: stend
+  become: true
+  roles:
+    - role: role1

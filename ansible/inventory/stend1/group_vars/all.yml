@@ -1,0 +1,16 @@
+---
+# Общие переменные для всех хостов
+
+ansible_python_interpreter: /usr/bin/python3
+
+# Каталог на удалённой ноде, в который клонируются репозитории
+deploy_root: /opt/devops
+
+# Репозитории
+devops_repo: https://github.com/alyesha27/DevOps.git
+frontend_repo: https://github.com/alyesha27/lr1frontend.git
+backend_repo: https://github.com/alyesha27/lr1backend.git
+
+# Версии
+devops_version: main
+services_version: v2.0   # тэг frontend и backend (версия 2.0)

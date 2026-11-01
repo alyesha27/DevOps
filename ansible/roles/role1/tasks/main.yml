@@ -1,0 +1,19 @@
+---
+# Раскатка: установка Docker -> клонирование репозиториев -> запуск контейнеров
+- name: Установка Docker и Docker Compose
+  ansible.builtin.import_tasks: subtasks/install_docker.yml
+  tags: [deploy, install]
+
+- name: Клонирование репозиториев
+  ansible.builtin.import_tasks: subtasks/clone_repos.yml
+  tags: [deploy, clone]
+
+- name: Запуск микросервисов
+  ansible.builtin.import_tasks: subtasks/start.yml
+  tags: [deploy, start]
+
+# Тэг never: задача выполняется только при явном указании --tags stop,
+# иначе при раскатке контейнеры были бы сразу остановлены.
+- name: Остановка микросервисов
+  ansible.builtin.import_tasks: subtasks/stop.yml
+  tags: [stop, never]

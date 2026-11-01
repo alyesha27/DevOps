@@ -1,0 +1,27 @@
+---
+- name: Создание рабочего каталога
+  ansible.builtin.file:
+    path: "{{ deploy_root }}"
+    state: directory
+    mode: "0755"
+
+- name: Клонирование репозитория DevOps
+  ansible.builtin.git:
+    repo: "{{ devops_repo }}"
+    dest: "{{ deploy_root }}/DevOps"
+    version: "{{ devops_version }}"
+    force: true
+
+- name: Клонирование репозитория backend (версия 2.0)
+  ansible.builtin.git:
+    repo: "{{ backend_repo }}"
+    dest: "{{ deploy_root }}/lr1backend"
+    version: "{{ services_version }}"
+    force: true
+
+- name: Клонирование репозитория frontend (версия 2.0)
+  ansible.builtin.git:
+    repo: "{{ frontend_repo }}"
+    dest: "{{ deploy_root }}/lr1frontend"
+    version: "{{ services_version }}"
+    force: true

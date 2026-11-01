@@ -1,0 +1,18 @@
+---
+- name: Остановка микросервисов через docker-compose.yml
+  community.docker.docker_compose_v2:
+    project_src: "{{ compose_project_dir }}"
+    files:
+      - docker-compose.yml
+    state: stopped
+
+- name: Список контейнеров после остановки
+  ansible.builtin.command: docker compose ps --all
+  args:
+    chdir: "{{ compose_project_dir }}"
+  register: compose_ps_stop
+  changed_when: false
+
+- name: Вывод состояния контейнеров
+  ansible.builtin.debug:
+    var: compose_ps_stop.stdout_lines

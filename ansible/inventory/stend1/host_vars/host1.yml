@@ -1,0 +1,6 @@
+
+# Параметры подключения к удалённой ноде host1.
+ansible_host: 192.168.0.160
+ansible_port: 22
+ansible_user: student
+ansible_ssh_private_key_file: /home/student/.ssh/id_ed25519
